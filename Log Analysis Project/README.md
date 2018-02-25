@@ -9,15 +9,42 @@ Using this information, the project will answer questions about the site's user 
 2. Who are the most popular article authors of all time? 
 3. On which days did more than 1% of requests lead to errors? 
 
-Project execution:
-------------------
-This program in this project will run on command line. It won't take any input from user. Instead it will connect to the database, use SQL queries to analyze the log data, and print out the answer to some questions.
-(This project is developed on Vagrant VM, whose configuration was provided by Udacity. The file newsdata.sql was provided which had the database set up)
+
+Project Design:
+---------------
+Here is the high level design for the three questions:
+
+1. What are the most popular three articles of all time? 
+
+-> The "path" column in "log" table has a substring that matches with the slug column in articles table.
+-> using this info, join the tables "articles" and "log"
+-> for each view of the article, a corresponding entry is found in the log table.
+-> by counting the number of rows matching the article, we get the total number of views of that particular article.
+-> So fetch the "title" from "articles" and count the number of views by aggregating and grouping.
+-> Finally order by the host number of views in descending order, and limit to 3 rows to get the 3 top most viewed articles.
+
+2. Who are the most popular article authors of all time? 
+-> The "path" column in "log" table has a substring that matches with the slug column in articles table.
+-> the "id" column in authors table is the foreign key - "author" in "articles" table
+-> using these two criteria, join the tables "authors", "articles" and "log"
+-> fetch the authors' names and the total number of views of articles authored by those authors by aggregations.
+-> Finally order the final output based on the number of views with the most views on top.
+
+3. On which days did more than 1% of requests lead to errors? 
+-> Extract the date from the timestamp
+-> create a view that has the data about total number of HTTP requests on each day
+-> Create a view that has dataabout total number of errors in HTTP requests on each day
+-> Then join the two above views and fetch the rows that have more than 1% requests with error code-404
 
 Project Environment setup:
 --------------------------
 1) Download the source file LogAnalysis.py and store it in the Vagrant folder.
 2) ensure that the newsdata.sql is also present in the same folder
+
+Project execution:
+------------------
+This program in this project will run on command line. It won't take any input from user. Instead it will connect to the database, use SQL queries to analyze the log data, and print out the answer to some questions.
+(This project is developed on Vagrant VM, whose configuration was provided by Udacity. The file newsdata.sql was provided which had the database set up)
 
 Steps to execute the project: 
 -----------------------------
