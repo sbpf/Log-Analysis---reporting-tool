@@ -14,27 +14,29 @@ Project Design:
 ---------------
 Here is the high level design for the three questions:
 
-1. What are the most popular three articles of all time? 
+Part 1: What are the most popular three articles of all time? 
 
--> The "path" column in "log" table has a substring that matches with the slug column in articles table.
--> using this info, join the tables "articles" and "log"
--> for each view of the article, a corresponding entry is found in the log table.
--> by counting the number of rows matching the article, we get the total number of views of that particular article.
--> So fetch the "title" from "articles" and count the number of views by aggregating and grouping.
--> Finally order by the host number of views in descending order, and limit to 3 rows to get the 3 top most viewed articles.
+1. The "path" column in "log" table has a substring that matches with the slug column in articles table.
+2. using this info, join the tables "articles" and "log"
+3. for each view of the article, a corresponding entry is found in the log table.
+4. by counting the number of rows matching the article, we get the total number of views of that particular article.
+5. So fetch the "title" from "articles" and count the number of views by aggregating and grouping.
+6. Finally order by the host number of views in descending order, and limit to 3 rows to get the 3 top most viewed articles.
 
-2. Who are the most popular article authors of all time? 
--> The "path" column in "log" table has a substring that matches with the slug column in articles table.
--> the "id" column in authors table is the foreign key - "author" in "articles" table
--> using these two criteria, join the tables "authors", "articles" and "log"
--> fetch the authors' names and the total number of views of articles authored by those authors by aggregations.
--> Finally order the final output based on the number of views with the most views on top.
+Part 2: Who are the most popular article authors of all time?
 
-3. On which days did more than 1% of requests lead to errors? 
--> Extract the date from the timestamp
--> create a view that has the data about total number of HTTP requests on each day
--> Create a view that has dataabout total number of errors in HTTP requests on each day
--> Then join the two above views and fetch the rows that have more than 1% requests with error code-404
+1. The "path" column in "log" table has a substring that matches with the slug column in articles table.
+2. the "id" column in authors table is the foreign key - "author" in "articles" table
+3. using these two criteria, join the tables "authors", "articles" and "log"
+4. fetch the authors' names and the total number of views of articles authored by those authors by aggregations.
+5. Finally order the final output based on the number of views with the most views on top.
+
+Part 3: On which days did more than 1% of requests lead to errors? 
+
+1. Extract the date from the timestamp
+2. create a view that has the data about total number of HTTP requests on each day
+3. Create a view that has dataabout total number of errors in HTTP requests on each day
+4. Then join the two above views and fetch the rows that have more than 1% requests with error code-404
 
 Project Environment setup:
 --------------------------
