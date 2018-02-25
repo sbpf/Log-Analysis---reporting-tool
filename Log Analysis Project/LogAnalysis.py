@@ -13,7 +13,11 @@ def get_popularArticles():
 
     db = psycopg2.connect(database="news")
     cursor = db.cursor()
-    query = "select articles.title, count(*) as views from log, articles where substr(log.path,10)=articles.slug group by articles.title order by views desc limit 3;"
+    query = '''select articles.title, count(*) as views
+            from log, articles
+            where substr(log.path,10)=articles.slug
+            group by articles.title
+            order by views desc limit 3;'''
     cursor.execute(query)
     articlesData = cursor.fetchall()
     db.close()
@@ -27,7 +31,11 @@ def get_popularAuthors():
 
     db = psycopg2.connect(database="news")
     cursor = db.cursor()
-    query = "select authors.name, count(*) as views from authors, articles, log where authors.id = articles.author and substr(log.path,10)=articles.slug group by authors.name order by views desc;"
+    query = '''select authors.name, count(*) as views
+            from authors, articles, log
+            where authors.id = articles.author
+            and substr(log.path,10)=articles.slug
+            group by authors.name order by views desc;'''
     cursor.execute(query)
     authorsData = cursor.fetchall()
     db.close()
@@ -40,7 +48,10 @@ def get_errorData():
     HTTP requests """
     db = psycopg2.connect(database="news")
     cursor = db.cursor()
-    query = "select total_requests.days, errors*100/total_requests as percentage from error_requests, total_requests where error_requests.days = total_requests.days and (errors*100/total_requests > 1);"
+    query = '''select total_requests.days, errors*100/total_requests as percentage
+            from error_requests, total_requests
+            where error_requests.days = total_requests.days
+            and (errors*100/total_requests > 1);'''
     cursor.execute(query)
     errorData = cursor.fetchall()
     db.close()
