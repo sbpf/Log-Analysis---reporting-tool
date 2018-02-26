@@ -1,4 +1,4 @@
-#!/usr/bin/env python3 for Python 3
+#!/usr/bin/env python3
 
 # This file contains Log Analysis reporting code
 # which analyses the the "news" database,
@@ -68,6 +68,7 @@ def print_top_articles(popular_articles):
     print('\nThe three top most articles viewed are:\n')
     for article in popular_articles:
         print(article[0] + '\t-\t' + str(article[1]) + '  views \n')
+    print('-------------------------------------------------------\n')
 
 
 def print_authors(popular_authors):
@@ -76,6 +77,7 @@ def print_authors(popular_authors):
     print('\nThe list of authors being listed as per their popularity:\n')
     for author in popular_authors:
         print(author[0] + '\t-\t' + str(author[1]) + '  views \n')
+    print('-------------------------------------------------------\n')
 
 
 def print_error_data(error_data):
@@ -84,6 +86,7 @@ def print_error_data(error_data):
     print('\nDays when there were more than 1% errors in HTTP :\n')
     for day in error_data:
         print(str(day[0]) + '\t-\t' + str(day[1]) + '% \n')
+    print('-------------------------------------------------------\n')
 
 
 def generate_report():

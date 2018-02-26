@@ -1,4 +1,6 @@
-About this project:
+Project Title: Log Analysis
+
+Description:
 -----------------------
 
 This project is an internal reporting tool for a newspaper site. It uses information from the already built database, to discover what kind of articles the site's readers like.
@@ -42,6 +44,9 @@ Project Environment setup:
 --------------------------
 1) Download the source file LogAnalysis.py and store it in the Vagrant folder.
 2) ensure that the newsdata.sql is also present in the same folder
+3) Vagrant and Virtual box download links:
+https://www.vagrantup.com/downloads.html
+https://www.virtualbox.org/wiki/Download_Old_Builds_5_1
 
 Project execution:
 ------------------
